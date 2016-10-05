@@ -53,6 +53,8 @@ alias -- p='git push'
 #syn#doc/p/Alias for 'git push'.
 alias -- s='git status'
 #syn#doc/s/Alias for 'git status'.
+alias -- t='git stash'
+#syn#doc/t/Alias for 'git stash'.
 alias -- u='cd ..'
 #syn#doc/u/Go up one directory.
 alias -- u4='cd ../../..'
