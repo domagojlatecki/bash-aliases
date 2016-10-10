@@ -133,12 +133,17 @@ h() {
     if [ -z "$1" ]; then
         echo -e "$(cat $ALIAS_FILES | grep '^#' | grep "#syn" | sed -r 's/^[^\/]+\/([^\/]+)\/(.+)/\\033[0;34m\1\\033[0m → \2/g' | sort)"
     else
-        echo -e "$(cat $ALIAS_FILES | grep '^#' | grep "#doc" | grep "/$1/" | sed -r 's/^[^\/]+\/[^\/]+\/(.+)/\1/g')"
+    	if [ "$1" = "-r" ]; then
+            echo -e "$(cat $ALIAS_FILES | grep '^#' | grep "#syn" | sed -r 's/^[^\/]+\/([^\/]+)\/(.+)/\1 → \2/g' | sort)"
+        else
+            echo -e "$(cat $ALIAS_FILES | grep '^#' | grep "#doc" | grep "/$1/" | sed -r 's/^[^\/]+\/[^\/]+\/(.+)/\1/g')"
+        fi
     fi
 }
 
 #syn/h/Provides info on specified alias, or lists all aliases if no argument is provided.
-#doc/h/Usage: h [alias_name]\n
+#doc/h/Usage: h [-r|alias_name]\n
+#doc/h/-r : prints out help in raw format (without color codes).
 #doc/h/Prints out detailed help message for specified alias. If no alias name is provided, list of all aliases along with their short descriptions will be printed.
 
 hl() {

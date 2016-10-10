@@ -43,6 +43,10 @@ alias -- e='nautilus --browser .'
 #syn#doc/e/Opens file explorer in current working directory.
 alias -- f='git fetch'
 #syn#doc/f/Alias for 'git fetch'.
+alias -- hs='h -r | grep'
+#syn#doc/hs/Searches alias descritions for specified word.
+alias -- m='man'
+#syn#doc/m/Alias for 'man'.
 alias -- n4='ifconfig | grep -E "encap|inet " |
 sed -r "s/^[A-Za-z0-9]+.+/€\0/" | xargs | sed -r "s/€/\n/g" | grep "addr:" |
 sed -r "s/([A-Za-z0-9]+).+?addr:([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+).+/\1 -> \2/"'
