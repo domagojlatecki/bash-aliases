@@ -41,6 +41,8 @@ alias -- d='git pull'
 #syn#doc/d/Alias for 'git pull'.
 alias -- e='nautilus --browser .'
 #syn#doc/e/Opens file explorer in current working directory.
+alias -- ew='sw; qw'
+#syn#doc/ew/Sets both working directories to an alternative directory.
 alias -- f='git fetch'
 #syn#doc/f/Alias for 'git fetch'.
 alias -- hs='h -r | grep'
