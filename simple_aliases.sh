@@ -33,8 +33,8 @@ alias -- -='cd -'
 #syn#doc/-/Return to previous working directory.
 alias -- a.='git add --all'
 #syn#doc/a./Alias for 'git add --all'.
-alias -- a='ls -a'
-#syn#doc/a/List all direcotries in current working directory.
+alias -- a='ls -A'
+#syn#doc/a/List almost all direcotries in current working directory.
 alias -- c='git commit'
 #syn#doc/c/Alias for 'git commit'.
 alias -- d='git pull'
@@ -57,6 +57,8 @@ alias -- o='git stash pop'
 #syn#doc/o/Alias for 'git stash pop'.
 alias -- p='git push'
 #syn#doc/p/Alias for 'git push'.
+alias -- rm='rm -I'
+#syn#doc/rm/Safeguard for 'rm' command.
 alias -- s='git status'
 #syn#doc/s/Alias for 'git status'.
 alias -- t='git stash'
