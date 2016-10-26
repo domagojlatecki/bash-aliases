@@ -57,7 +57,7 @@ alias -- o='git stash pop'
 #syn#doc/o/Alias for 'git stash pop'.
 alias -- p='git push'
 #syn#doc/p/Alias for 'git push'.
-alias -- rm='rm -I'
+alias -- rm='rm -rI'
 #syn#doc/rm/Safeguard for 'rm' command.
 alias -- s='git status'
 #syn#doc/s/Alias for 'git status'.
