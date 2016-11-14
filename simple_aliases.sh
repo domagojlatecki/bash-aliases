@@ -79,5 +79,7 @@ alias -- uuuuu='cd ../../../..'
 #syn#doc/uuuuu/Go up 5 directories.
 alias -- v='vim'
 #syn#doc/v/Open vim.
+alias -- sv='sudo vim'
+#syn#doc/sv/Open vim as superuser.
 alias -- x='clear'
 #syn#doc/x/Clears the screen.
