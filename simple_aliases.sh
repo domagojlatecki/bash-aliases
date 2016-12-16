@@ -79,6 +79,10 @@ alias -- uuuuu='cd ../../../..'
 #syn#doc/uuuuu/Go up 5 directories.
 alias -- v='vim'
 #syn#doc/v/Open vim.
+alias -- vs='vmstat -wS M'
+#syn#doc/vs/Show virtual memory statistics in wide mode, using MiB as unit.
+alias -- vs1='vs 1'
+#syn#doc/vs1/Alias for 'vs 1'.
 alias -- sv='sudo vim'
 #syn#doc/sv/Open vim as superuser.
 alias -- x='clear'
