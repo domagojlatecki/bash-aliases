@@ -28,26 +28,31 @@
 
 PS1_DIR_CLR="01;33m"
 PS1_ALT_DIR_CLR="01;34m"
+TW_DIR_CLR="01;31m"
 
 sw() {
-    if [ -z "$OTHER_PWD_SET" ];
-    then
-        OTHER_PWD_SET="t"
+    if [ -z "$TW_ACTIVE" ]; then
+        if [ -z "$OTHER_PWD_SET" ]; then
+            OTHER_PWD_SET="t"
+            OTHER_PWD="$PWD"
+            OTHER_OLD_PWD="$OLDPWD"
+        fi
+
+        local ACTIVE_DIR_CLR="$PS1_DIR_CLR"
+
+        PS1_DIR_CLR="$PS1_ALT_DIR_CLR"
+        PS1_ALT_DIR_CLR="$ACTIVE_DIR_CLR"
+
+        local TARGET="$OTHER_PWD"
+
         OTHER_PWD="$PWD"
-        OTHER_OLD_PWD="$OLDPWD"
+    else
+        TW_ACTIVE=""
+        TARGET="$NTW_PWD"
+        NTW_PWD=""
+        NTW_OLD_PWD=""
     fi
-
-    local ACTIVE_DIR_CLR="$PS1_DIR_CLR"
-
-    PS1_DIR_CLR="$PS1_ALT_DIR_CLR"
-    PS1_ALT_DIR_CLR="$ACTIVE_DIR_CLR"
-
-    local TARGET="$OTHER_PWD"
-
-    OTHER_PWD="$PWD"
-
-    if [ ! -z "$1" ];
-    then
+    if [ ! -z "$1" ]; then
         TARGET="$1"
     fi
 
@@ -58,7 +63,21 @@ sw() {
 #doc/sw/Usage: sw [dir]\n
 #doc/sw/Switches to an alternate working directory. Old working directory will be saved so it can be switched back to using this alias.
 
+tw() {
+    if [ -z "$TW_ACTIVE" ]; then
+        TW_ACTIVE="t"
+        NTW_PWD="$PWD"
+        NTW_OLD_PWD="$OLDPWD"
+        cd /tmp/
+    fi
+}
+
+#syn#doc/tw/Switch to temporary working directory.
+
 qw() {
+    TW_ACTIVE=""
+    NTW_PWD=""
+    NTW_OLD_PWD=""
     PS1_DIR_CLR="01;33m"
     PS1_ALT_DIR_CLR="01;34m"
     OTHER_PWD_SET=""
@@ -70,7 +89,9 @@ qw() {
 #doc/qw/Unsets the alternate working directory set by the sw alias.
 
 sw_colored_wd() {
-    if [ -n "$OTHER_PWD_SET" ]; then
+    if [ -n "$TW_ACTIVE" ]; then
+        echo -n "[\[\033[$TW_DIR_CLR\]\w\[\033[0m\]]"
+    elif [ -n "$OTHER_PWD_SET" ]; then
         if [ "$PWD" != "$OTHER_PWD" ]; then
             local symbol="*"
         else
