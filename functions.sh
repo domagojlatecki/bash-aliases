@@ -172,3 +172,31 @@ hl() {
 }
 
 #syn#doc/hl/Same as 'h' alias, but piped to less.
+
+y() {
+    if [ -z "$1" ]; then
+        if [ -z "$Y_FILES" ]; then
+            echo "No file(s) selected."
+        else
+            echo "Selected file(s): $Y_FILES, source directory: $Y_SRC"
+            read -p "Continue (y/n)? " answer
+            if [ "$answer" = "y"  ]; then
+                local TMP_PWD="$PWD"
+                local TMP_OLDPWD="$OLDPWD"
+                cd "$Y_SRC"
+                cp -t "$TMP_PWD" $Y_FILES
+                cd "$TMP_PWD"
+                OLDPWD="$TMP_OLDPWD"
+            else
+                echo "Canceled."
+            fi
+        fi
+    else
+        echo "Selected file(s): $@"
+        Y_FILES="$@"
+        Y_SRC="$PWD"
+    fi
+}
+#syn/y/Select and copy files to current working directory.
+#doc/y/Usage: y [files...]\n
+#doc/y/Selects files to be copied. When no files are specified, previously selected files are copied into current working directory.
