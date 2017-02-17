@@ -87,3 +87,5 @@ alias -- sv='sudo vim'
 #syn#doc/sv/Open vim as superuser.
 alias -- x='clear'
 #syn#doc/x/Clears the screen.
+alias -- zg='curl -l wttr.in/Zagreb'
+#syn#doc/zg/Prints weather in Zagreb. Requires internet connection.
