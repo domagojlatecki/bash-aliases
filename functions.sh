@@ -137,6 +137,8 @@ clns() {
     count_code_lines Java "*.java"
     count_code_lines JavaScript "*.js"
     count_code_lines TypeScript "*.ts"
+    count_code_lines C "*.c"
+    count_code_lines C++ "*.cpp"
 
     if [ $grand_total_line_count -ne 0 ]; then
         echo -e "\n\033[1;33m$grand_total_line_count\033[0m line(s) across \033[1;33m$grand_total_file_count\033[0m files.\n"
