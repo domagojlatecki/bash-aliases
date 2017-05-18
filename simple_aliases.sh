@@ -40,6 +40,8 @@ alias -- t='git stash'
 #syn#doc/t/Alias for 'git stash'.
 alias -- u='cd ..'
 #syn#doc/u/Go up one directory.
+alias -- ua='u; a'
+#syn#doc/ua/Call alias 'u' then alias 'a'.
 alias -- u4='cd ../../..'
 #syn#doc/u4/Go up 4 directories.
 alias -- u5='cd ../../../..'
