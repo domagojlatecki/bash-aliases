@@ -6,12 +6,14 @@ alias -- ~='cd'
 #syn#doc/~/Return to home directory.
 alias -- -='cd -'
 #syn#doc/-/Return to previous working directory.
-alias -- a.='git add --all'
-#syn#doc/a./Alias for 'git add --all'.
 alias -- a='ls -A'
 #syn#doc/a/List almost all direcotries in current working directory.
+alias -- a.='git add --all'
+#syn#doc/a./Alias for 'git add --all'.
 alias -- c='git commit'
 #syn#doc/c/Alias for 'git commit'.
+alias -- c.='git commit --amend'
+#syn#doc/c./Alias for 'git commit --amend'.
 alias -- d='git pull'
 #syn#doc/d/Alias for 'git pull'.
 alias -- e='nautilus --browser .'
@@ -32,6 +34,8 @@ alias -- o='git stash pop'
 #syn#doc/o/Alias for 'git stash pop'.
 alias -- p='git push'
 #syn#doc/p/Alias for 'git push'.
+alias -- psg='pgrep'
+#syn#doc/psg/Alias for 'pgrep'.
 alias -- rm='rm -vrI'
 #syn#doc/rm/Safeguard for 'rm' command.
 alias -- s='git status'
