@@ -78,60 +78,11 @@ sw_colored_wd() {
     fi
 }
 
-count_code_lines() {
-    local total_comment_count=0
-    local total_documentation_count=0
-    local total_line_count=0
-    local total_empty_lines=0
-    local total_source_files=0
-
-    for source_file in $(find . -type f -name "$2"); do
-        total_comment_count=$((total_comment_count + $(cat $source_file | grep -e "^\s*//" | wc -l)))
-        total_comment_count=$((total_comment_count + $(cat $source_file | grep -Pzo "^.*?/\*[^\*][\s\S]*?\*\/" | rev | grep -vP ".+?\*/\s*[^\s]" | wc -l)))
-        total_documentation_count=$((total_documentation_count + $(cat $source_file | grep -Pzo "^.*?/\*\*[\s\S]*?\*\/" | rev | grep -vP ".+?\*\*/\s*[^\s]" | wc -l)))
-        total_empty_lines=$((total_empty_lines + $(cat $source_file | grep -e "^\s*$" | wc -l)))
-        total_line_count=$((total_line_count + $(cat $source_file | wc -l)))
-        total_source_files=$((total_source_files + 1))
-        grand_total_file_count=$((grand_total_file_count + 1))
-    done
-
-    local total_code_count=$((total_line_count-total_comment_count-total_documentation_count-total_empty_lines))
-
-    if [ $total_source_files -ne 0  ]; then
-        echo ""
-        echo -e "Found total of \033[0;33m$total_line_count\033[0m line(s) across \033[0;33m$total_source_files\033[0m $1 source file(s)."
-        echo -e "There are \033[0;32m$total_code_count\033[0m line(s) of code, \033[0;36m$total_documentation_count\033[0m line(s) of documentation, \033[0;34m$total_comment_count\033[0m line(s) of comments and \033[0;31m$total_empty_lines\033[0m empty line(s)."
-    fi
-
-    grand_total_line_count=$((grand_total_line_count + total_line_count))
-}
-
-clns() {
-    grand_total_line_count=0
-    grand_total_file_count=0
-    count_code_lines Java "*.java"
-    count_code_lines JavaScript "*.js"
-    count_code_lines TypeScript "*.ts"
-    count_code_lines C "*.c"
-    count_code_lines C++ "*.cpp"
-
-    if [ $grand_total_line_count -ne 0 ]; then
-        echo -e "\n\033[1;33m$grand_total_line_count\033[0m line(s) across \033[1;33m$grand_total_file_count\033[0m files.\n"
-    else
-        echo -e "\nNo code found.\n"
-    fi
-}
-
-#syn/clns/Counts lines of code in current working directory.
-#doc/clns/Usage: clns\n
-#doc/clns/Counts and prints number of empty lines, lines with code, comments and documentation contained in working directory tree.
-#doc/clns/Lines are counted only for files that end in .java, .js or .ts.
-
 h() {
     if [ -z "$1" ]; then
         echo -e "$(cat $ALIAS_FILES | grep '^#' | grep "#syn" | sed -r 's/^[^\/]+\/([^\/]+)\/(.+)/\\033[0;34m\1\\033[0m → \2/g' | sort)"
     else
-    	if [ "$1" = "-r" ]; then
+        if [ "$1" = "-r" ]; then
             echo -e "$(cat $ALIAS_FILES | grep '^#' | grep "#syn" | sed -r 's/^[^\/]+\/([^\/]+)\/(.+)/\1 → \2/g' | sort)"
         else
             echo -e "$(cat $ALIAS_FILES | grep '^#' | grep "#doc" | grep "/$1/" | sed -r 's/^[^\/]+\/[^\/]+\/(.+)/\1/g')"
