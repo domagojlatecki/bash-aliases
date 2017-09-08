@@ -24,13 +24,15 @@ else
 fi
 
 bash -c \
-"cat $action ~/.bash_aliases << EOF
+"
+cat $action ~/.bash_aliases << EOF
 export ALIAS_HOME=\"$PWD\"
-export ALIAS_FILES=\"\\\$ALIAS_HOME/simple_aliases.sh \\\$ALIAS_HOME/functions.sh\"
+export ALIAS_FILES=\"\\\$ALIAS_HOME/simple_aliases.sh \\\$ALIAS_HOME/functions.sh \\\$ALIAS_HOME/config.sh\"
 
 for ALIAS_FILE in \\\$ALIAS_FILES; do
     source \"\\\$ALIAS_FILE\"
 done
-EOF"
+EOF
+"
 
 echo "Action completed."

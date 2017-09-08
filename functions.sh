@@ -1,10 +1,6 @@
 #!/bin/bash
 # This file contains functions which act as de facto complex aliases.
 
-PS1_DIR_CLR="01;33m"
-PS1_ALT_DIR_CLR="01;34m"
-TW_DIR_CLR="01;31m"
-
 sw() {
     if [ -z "$TW_ACTIVE" ]; then
         if [ -z "$OTHER_PWD_SET" ]; then
@@ -65,7 +61,7 @@ qw() {
 
 sw_colored_wd() {
     if [ -n "$TW_ACTIVE" ]; then
-        echo -n "[\[\033[$TW_DIR_CLR\]\w\[\033[0m\]]"
+        echo -n "[\[\033[$PS1_TW_DIR_CLR\]\w\[\033[0m\]]"
     elif [ -n "$OTHER_PWD_SET" ]; then
         if [ "$PWD" != "$OTHER_PWD" ]; then
             local symbol="*"
