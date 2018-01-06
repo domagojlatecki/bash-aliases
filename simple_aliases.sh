@@ -26,6 +26,8 @@ alias -- hs='h -r | grep'
 #syn#doc/hs/Searches alias descritions for specified word.
 alias -- m='man'
 #syn#doc/m/Alias for 'man'.
+alias -- mcc='mvn clean compile'
+#syn#doc/mcc/Alias for 'mvn clean compile'.
 alias -- n4='ifconfig | grep -E "encap|inet " |
 sed -r "s/^[A-Za-z0-9]+.+/€\0/" | xargs | sed -r "s/€/\n/g" | grep "addr:" |
 sed -r "s/([A-Za-z0-9]+).+?addr:([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+).+/\1 -> \2/"'
