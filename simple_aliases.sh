@@ -16,7 +16,7 @@ alias -- c.='git commit --amend'
 #syn#doc/c./Alias for 'git commit --amend'.
 alias -- d='git pull'
 #syn#doc/d/Alias for 'git pull'.
-alias -- e='nautilus --browser .'
+alias -- e='open .'
 #syn#doc/e/Opens file explorer in current working directory.
 alias -- ew='sw; qw'
 #syn#doc/ew/Sets both working directories to an alternative directory.
@@ -28,6 +28,8 @@ alias -- m='man'
 #syn#doc/m/Alias for 'man'.
 alias -- mcc='mvn clean compile'
 #syn#doc/mcc/Alias for 'mvn clean compile'.
+alias -- mcctjs='mvn clean compile verify jacoco:report sonar:sonar'
+#syn#doc/mcctjs/Alias for 'mvn clean verify jacoco:report sonar:sonar'.
 alias -- n4='ifconfig | grep -E "encap|inet " |
 sed -r "s/^[A-Za-z0-9]+.+/€\0/" | xargs | sed -r "s/€/\n/g" | grep "addr:" |
 sed -r "s/([A-Za-z0-9]+).+?addr:([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+).+/\1 -> \2/"'
