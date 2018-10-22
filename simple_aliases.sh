@@ -16,6 +16,8 @@ alias -- c.='git commit --amend'
 #syn#doc/c./Alias for 'git commit --amend'.
 alias -- d='git pull'
 #syn#doc/d/Alias for 'git pull'.
+alias -- dps='docker ps'
+#syn#doc/dps/Alias for 'docker ps'.
 alias -- e='open .'
 #syn#doc/e/Opens file explorer in current working directory.
 alias -- ew='sw; qw'
