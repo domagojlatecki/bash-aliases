@@ -1,6 +1,16 @@
 #!/bin/bash
 # This file contains functions which act as de facto complex aliases.
 
+A() {
+    ANCHOR="$PWD"
+}
+
+U() {
+    if [[ "$PWD" == "$ANCHOR"* ]]; then
+        cd "$ANCHOR"
+    fi
+}
+
 sw() {
     if [ -z "$TW_ACTIVE" ]; then
         if [ -z "$OTHER_PWD_SET" ]; then
