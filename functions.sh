@@ -134,3 +134,25 @@ y() {
 #syn/y/Select and copy files to current working directory.
 #doc/y/Usage: y [files...]\n
 #doc/y/Selects files to be copied. When no files are specified, previously selected files are copied into current working directory.
+
+current_java_version() {
+    ACTIVE_JAVA_VERSION_CLR="01;36m"
+    echo -ne "[\[\033[$ACTIVE_JAVA_VERSION_CLR\]\xE2\x98\x95 $ACTIVE_JAVA_VERSION\[\033[0m\]]"
+}
+
+jv() {
+    if [ -z "$1" ]; then
+        echo "Active Java version: $ACTIVE_JAVA_VERSION"
+    else
+        if [ -z "${JAVA_VERSIONS[$1]}" ]; then
+            echo "No such Java version: $1"
+        else
+            ACTIVE_JAVA_VERSION="$1"
+            export JAVA_HOME="${JAVA_VERSIONS[$ACTIVE_JAVA_VERSION]}"
+            echo "Switched to Java version $ACTIVE_JAVA_VERSION"
+        fi
+    fi
+}
+
+#syn/jv/Sets currently active Java version.
+#doc/jv/Usage: jv [version]
