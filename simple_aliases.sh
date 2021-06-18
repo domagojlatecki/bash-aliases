@@ -10,6 +10,8 @@ alias -- a='ls -A'
 #syn#doc/a/List almost all direcotries in current working directory.
 alias -- a.='git add --all'
 #syn#doc/a./Alias for 'git add --all'.
+alias -- b='git branch'
+#syn#doc/b/Alias for 'git branch'
 alias -- c='git commit'
 #syn#doc/c/Alias for 'git commit'.
 alias -- c.='git commit --amend'
