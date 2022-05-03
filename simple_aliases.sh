@@ -26,6 +26,8 @@ alias -- ew='sw; qw'
 #syn#doc/ew/Sets both working directories to an alternative directory.
 alias -- f='git fetch'
 #syn#doc/f/Alias for 'git fetch'.
+alias -- fp='git fetch --prune'
+#syn#doc/fp/Alias for 'git fetch --prune'.
 alias -- hs='h -r | grep'
 #syn#doc/hs/Searches alias descritions for specified word.
 alias -- m='man'
