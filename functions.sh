@@ -148,7 +148,9 @@ jv() {
             echo "No such Java version: $1"
         else
             ACTIVE_JAVA_VERSION="$1"
+            WITHOUT_JAVA_PATH="${PATH/${JAVA_HOME}\/bin:/}"
             export JAVA_HOME="${JAVA_VERSIONS[$ACTIVE_JAVA_VERSION]}"
+            export PATH="${JAVA_HOME}/bin:${WITHOUT_JAVA_PATH}"
             echo "Switched to Java version $ACTIVE_JAVA_VERSION"
         fi
     fi
