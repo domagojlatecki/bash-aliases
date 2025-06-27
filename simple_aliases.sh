@@ -30,22 +30,10 @@ alias -- fp='git fetch --prune'
 #syn#doc/fp/Alias for 'git fetch --prune'.
 alias -- hs='h -r | grep'
 #syn#doc/hs/Searches alias descritions for specified word.
-alias -- m='man'
-#syn#doc/m/Alias for 'man'.
-alias -- mcc='mvn clean compile'
-#syn#doc/mcc/Alias for 'mvn clean compile'.
-alias -- mcctjs='mvn clean compile verify jacoco:report sonar:sonar'
-#syn#doc/mcctjs/Alias for 'mvn clean verify jacoco:report sonar:sonar'.
-alias -- n4='ifconfig | grep -E "encap|inet " |
-sed -r "s/^[A-Za-z0-9]+.+/€\0/" | xargs | sed -r "s/€/\n/g" | grep "addr:" |
-sed -r "s/([A-Za-z0-9]+).+?addr:([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+).+/\1 -> \2/"'
-#syn#doc/n4/Prints IPv4 adresses of all availible network interfaces.
 alias -- o='git stash pop'
 #syn#doc/o/Alias for 'git stash pop'.
 alias -- p='git push'
 #syn#doc/p/Alias for 'git push'.
-alias -- psg='pgrep'
-#syn#doc/psg/Alias for 'pgrep'.
 alias -- rm='rm -vrI'
 #syn#doc/rm/Safeguard for 'rm' command.
 alias -- s='git status'
@@ -54,28 +42,24 @@ alias -- t='git stash'
 #syn#doc/t/Alias for 'git stash'.
 alias -- u='cd ..'
 #syn#doc/u/Go up one directory.
-alias -- ua='u; a'
-#syn#doc/ua/Call alias 'u' then alias 'a'.
-alias -- u4='cd ../../..'
+alias -- u3='cd ../../..'
+#syn#doc/u3/Go up 3 directories.
+alias -- u4='cd ../../../..'
 #syn#doc/u4/Go up 4 directories.
-alias -- u5='cd ../../../..'
+alias -- u5='cd ../../../../..'
 #syn#doc/u5/Go up 5 directories.
 alias -- uu='cd ../..'
 #syn#doc/uu/Go up 2 directories.
 alias -- uuu='cd ../../..'
 #syn#doc/uuu/Go up 3 directories.
-alias -- uuuu='cd ../../..'
+alias -- uuuu='cd ../../../...'
 #syn#doc/uuuu/Go up 4 directories.
-alias -- uuuuu='cd ../../../..'
+alias -- uuuuu='cd ../../../../...'
 #syn#doc/uuuuu/Go up 5 directories.
-alias -- v='vim'
-#syn#doc/v/Open vim.
 alias -- vs='vmstat -wS M'
 #syn#doc/vs/Show virtual memory statistics in wide mode, using MiB as unit.
 alias -- vs1='vs 1'
 #syn#doc/vs1/Alias for 'vs 1'.
-alias -- sv='sudo vim'
-#syn#doc/sv/Open vim as superuser.
 alias -- x='clear'
 #syn#doc/x/Clears the screen.
 alias -- zg='curl -l wttr.in/Zagreb?m'
