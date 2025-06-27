@@ -136,7 +136,7 @@ y() {
 #doc/y/Selects files to be copied. When no files are specified, previously selected files are copied into current working directory.
 
 current_java_version() {
-    ACTIVE_JAVA_VERSION_CLR="01;36m"
+    local ACTIVE_JAVA_VERSION_CLR="01;36m"
     echo -ne "[\[\033[$ACTIVE_JAVA_VERSION_CLR\]\xE2\x98\x95 $ACTIVE_JAVA_VERSION\[\033[0m\]]"
 }
 
@@ -156,3 +156,21 @@ jv() {
 
 #syn/jv/Sets currently active Java version.
 #doc/jv/Usage: jv [version]
+
+opt_newline_and_exit_code() {
+    local EC=$?
+
+    if [ $EC -ne 0 ]; then
+        local EE_CLR="01;31m"
+    else
+        local EE_CLR="01;37m"
+    fi
+
+    IFS=';' read -sdR -p $'\E[6n' ROW COL
+
+    if [ $COL -ne 1 ]; then
+        echo -n "\[\033[0;31m\]⊖ ↵\[\033[0m\]\n\[\033[0m\]╭─[\u@\h][\[\033[$EE_CLR\]$EC\[\033[0m\]]"
+    else
+        echo -n "\[\033[0m\]╭─[\u@\h][\[\033[$EE_CLR\]$EC\[\033[0m\]]"
+    fi
+}
