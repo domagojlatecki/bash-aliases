@@ -137,7 +137,7 @@ y() {
 
 current_java_version() {
     local ACTIVE_JAVA_VERSION_CLR="01;36m"
-    echo -ne "[\[\033[$ACTIVE_JAVA_VERSION_CLR\]\xE2\x98\x95 $ACTIVE_JAVA_VERSION\[\033[0m\]]"
+    echo -ne "[\[\033[$ACTIVE_JAVA_VERSION_CLR\]\xE2\x98\x95$ACTIVE_JAVA_VERSION\[\033[0m\]]"
 }
 
 jv() {
@@ -174,5 +174,13 @@ opt_newline_and_exit_code() {
         echo -n "\[\033[0;31m\]⊖ ↵\[\033[0m\]\n\[\033[0m\]╭─[\u@\h][\[\033[$EE_CLR\]$EC\[\033[0m\]]"
     else
         echo -n "\[\033[0m\]╭─[\u@\h][\[\033[$EE_CLR\]$EC\[\033[0m\]]"
+    fi
+}
+
+bg_job_count() {
+    local NUM_JOBS="$(jobs | wc -l)"
+
+    if [ $NUM_JOBS -ne 0 ]; then
+        echo -n "{\[\033[01;35m\]λ$NUM_JOBS\[\033[0m\]}"
     fi
 }
