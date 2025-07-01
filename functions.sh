@@ -33,6 +33,7 @@ sw() {
         NTW_PWD=""
         NTW_OLD_PWD=""
     fi
+
     if [ ! -z "$1" ]; then
         TARGET="$1"
     fi
@@ -70,6 +71,27 @@ qw() {
 #doc/qw/Unsets the alternate working directory set by the sw alias.
 
 sw_colored_wd() {
+    local WD_CLR="\[\033[$PS1_DIR_CLR\]"
+    local A_CLR="\[\033[01;36m\]"
+    local RST_CLR="\[\033[0m\]"
+    local ANCHOR_SYMBOL=" ∫ "
+ 
+    local ANCHORED_WD="${WD_CLR}\w${RST_CLR}"
+
+    if [[ -n "$ANCHOR" ]]; then
+        if [[ "$PWD" == "$ANCHOR/"* ]]; then
+            local BEFORE_ANCHOR="$ANCHOR"
+            local AFTER_ANCHOR="${PWD/$ANCHOR\//}"
+
+            local ANCHORED="${BEFORE_ANCHOR}${RST_CLR}${A_CLR}${ANCHOR_SYMBOL}${RST_CLR}${WD_CLR}${AFTER_ANCHOR}${RST_CLR}"
+            ANCHORED_WD="${WD_CLR}${ANCHORED/$HOME/~}"
+        elif [[ "$ANCHOR" == "/" && "$PWD" != "/" ]]; then
+            ANCHORED_WD="${PWD/\//${A_CLR}$ANCHOR_SYMBOL${RST_CLR}${WD_CLR}}${RST_CLR}"
+        else
+            ANCHORED_WD="${WD_CLR}${PWD/$HOME/~}${RST_CLR}"
+        fi
+    fi
+
     if [ -n "$TW_ACTIVE" ]; then
         echo -n "[\[\033[$PS1_TW_DIR_CLR\]\w\[\033[0m\]]"
     elif [ -n "$OTHER_PWD_SET" ]; then
@@ -78,9 +100,9 @@ sw_colored_wd() {
         else
             local symbol="."
         fi
-        echo -n "[\[\033[$PS1_ALT_DIR_CLR\]$symbol\[\033[0m\]|\[\033[$PS1_DIR_CLR\]\w\[\033[0m\]]"
+        echo -n "[\[\033[$PS1_ALT_DIR_CLR\]$symbol\[\033[0m\]|$ANCHORED_WD]"
     else
-        echo -n "[\[\033[$PS1_DIR_CLR\]\w\[\033[0m\]]"
+        echo -n "[$ANCHORED_WD]"
     fi
 }
 
