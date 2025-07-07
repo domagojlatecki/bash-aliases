@@ -12,6 +12,8 @@ U() {
 }
 
 sw() {
+    local TARGET=""
+
     if [ -z "$TW_ACTIVE" ]; then
         if [ -z "$OTHER_PWD_SET" ]; then
             OTHER_PWD_SET="t"
@@ -24,7 +26,7 @@ sw() {
         PS1_DIR_CLR="$PS1_ALT_DIR_CLR"
         PS1_ALT_DIR_CLR="$ACTIVE_DIR_CLR"
 
-        local TARGET="$OTHER_PWD"
+        TARGET="$OTHER_PWD"
 
         OTHER_PWD="$PWD"
     else
