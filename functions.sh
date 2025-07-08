@@ -12,20 +12,25 @@ U() {
 }
 
 sw() {
-    # TODO: track OLDPWD
     local target=""
+    local tragetOldPWd=""
 
     if [ -z "$TW_ACTIVE" ]; then
-        if [ -z "$OTHER_PWD_IDX" ]; then
-            OTHER_PWD_IDX="1"
+        if [ -z "$PWD_IDX" ]; then
+            PWD_IDX="1"
             OTHER_PWD="$PWD"
-            OTHER_OLD_PWD="$OLDPWD"
+            OLD_PWD_1="$OLDPWD"
+            OLD_PWD_2="$OLDPWD"
         fi
 
-        if [ "$OTHER_PWD_IDX" -eq "1" ]; then
-            OTHER_PWD_IDX="2"
+        if [ "$PWD_IDX" -eq "1" ]; then
+            PWD_IDX="2"
+            OLD_PWD_1="$OLDPWD"
+            tragetOldPWd="$OLD_PWD_2"
         else 
-            OTHER_PWD_IDX="1"
+            PWD_IDX="1"
+            OLD_PWD_2="$OLDPWD"
+            tragetOldPWd="$OLD_PWD_1"
         fi
 
         target="$OTHER_PWD"
@@ -34,6 +39,17 @@ sw() {
     else
         TW_ACTIVE=""
         target="$NTW_PWD"
+
+        if [ -n "$PWD_IDX" ]; then
+            if [ "$PWD_IDX" -eq "1" ]; then
+                tragetOldPWd="$OLD_PWD_1"
+            else
+                tragetOldPWd="$OLD_PWD_2"
+            fi
+        else
+            tragetOldPWd="$NTW_OLD_PWD"
+        fi
+
         NTW_PWD=""
         NTW_OLD_PWD=""
     fi
@@ -43,6 +59,10 @@ sw() {
     fi
 
     cd "$target"
+
+    if [ ! -z "$tragetOldPWd" ]; then
+        OLDPWD="$tragetOldPWd"
+    fi
 }
 
 #syn/sw/Swaps current working directory.
@@ -64,7 +84,7 @@ qw() {
     TW_ACTIVE=""
     NTW_PWD=""
     NTW_OLD_PWD=""
-    OTHER_PWD_IDX=""
+    PWD_IDX=""
     OTHER_PWD="$PWD"
 }
 
@@ -76,7 +96,7 @@ sw_colored_wd() {
     local wdClr="\[\033[$PS1_DIR_CLR\]"
     local oWdClr="\[\033[$PS1_ALT_DIR_INACTIVE_CLR\]"
 
-    if [ "${OTHER_PWD_IDX:-0}" -eq "2" ]; then
+    if [ "${PWD_IDX:-0}" -eq "2" ]; then
         wdClr="\[\033[$PS1_ALT_DIR_CLR\]"
         oWdClr="\[\033[$PS1_DIR_INACTIVE_CLR\]"
     fi
@@ -102,12 +122,14 @@ sw_colored_wd() {
 
     if [ -n "$TW_ACTIVE" ]; then
         echo -n "[\[\033[$PS1_TW_DIR_CLR\]\w$rstClr]"
-    elif [ -n "$OTHER_PWD_IDX" ]; then
+    elif [ -n "$PWD_IDX" ]; then
         local relWdPath=$(realpath -s --relative-to="$PWD" "$OTHER_PWD")
 
-        # TODO: add dot prefix when OTHER_PWD is in current dir
+        if [[ "$relWdPath" != "~"* && "$relWdPath" != .* && "$relWdPath" != /* ]]; then
+            relWdPath="./$relWdPath"
+        fi
 
-        if [ "$OTHER_PWD_IDX" -eq "1" ]; then
+        if [ "$PWD_IDX" -eq "1" ]; then
             echo -n "[$anchoredWd|$oWdClr$relWdPath$rstClr]"
         else 
             echo -n "[$oWdClr$relWdPath$rstClr|$anchoredWd]"
