@@ -5,11 +5,15 @@ A() {
     ANCHOR="$PWD"
 }
 
+#syn#doc/A/Set anchor directory.
+
 U() {
     if [[ "$PWD" == "$ANCHOR"* ]]; then
         cd "$ANCHOR"
     fi
 }
+
+#syn#doc/U/Navigate up to the current anchor directory, if set.
 
 sw() {
     local target=""
@@ -167,28 +171,35 @@ y() {
         if [ -z "$Y_FILES" ]; then
             echo "No file(s) selected."
         else
-            echo "Selected file(s): $Y_FILES, source directory: $Y_SRC"
+            echo "Selected file(s): ${Y_FILES[@]#${Y_SRC}/}, source directory: $Y_SRC"
             read -p "Continue (y/n)? " answer
             if [ "$answer" = "y"  ]; then
-                local tmpPwd="$PWD"
-                local tmpOldPwd="$OLDPWD"
-                cd "$Y_SRC"
-                cp -t "$tmpPwd" $Y_FILES
-                cd "$tmpPwd"
-                OLDPWD="$tmpOldPwd"
+                cp -t . "${Y_FILES[@]}"
             else
                 echo "Canceled."
             fi
         fi
     else
         echo "Selected file(s): $@"
-        Y_FILES="$@"
+        Y_FILES=("${@/#/${PWD}/}")
         Y_SRC="$PWD"
     fi
 }
 #syn/y/Select and copy files to current working directory.
 #doc/y/Usage: y [files...]\n
 #doc/y/Selects files to be copied. When no files are specified, previously selected files are copied into current working directory.
+
+Y() {
+    unset Y_FILES
+    unset Y_SRC
+}
+#syn#doc/Y/Reset file selection done by 'y' alias.
+
+y_file_count() {
+    if [ -n "$Y_FILES" ]; then
+        echo -ne "(\[\033[$Y_FILE_COUNT_CLR\]🗎 ${#Y_FILES[@]}\[\033[0m\])"
+    fi
+}
 
 current_java_version() {
     echo -ne "[\[\033[$ACTIVE_JAVA_VERSION_CLR\]\xE2\x98\x95$ACTIVE_JAVA_VERSION\[\033[0m\]]"
