@@ -202,7 +202,23 @@ y_file_count() {
 }
 
 current_java_version() {
-    echo -ne "[\[\033[$ACTIVE_JAVA_VERSION_CLR\]\xE2\x98\x95$ACTIVE_JAVA_VERSION\[\033[0m\]]"
+    local projectType=""
+
+    if [[ -f "build.mill" || -f "build.sc" ]]; then
+        projectType="Mill"
+    elif [[ -f "build.sbt" ]]; then
+        projectType="sbt"
+    elif [[ -f "build.gradle" || -f "build.gradle.kts" ]]; then
+        projectType="Gradle"
+    elif [[ -f "pom.xml" ]]; then
+        projectType="Maven"
+    fi
+
+    if [ -n "$projectType" ]; then
+        projectType="\[\033[0m\]|\[\033[$JVM_PROJECT_TYPE_CLR\]$projectType"
+    fi
+
+    echo -ne "[\[\033[$ACTIVE_JAVA_VERSION_CLR\]\xE2\x98\x95$ACTIVE_JAVA_VERSION$projectType\[\033[0m\]]"
 }
 
 jv() {
