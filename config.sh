@@ -1,6 +1,7 @@
 #!/bin/bash
 # Configuration file for all aliases.
 
+HOST_CLR="0;0m"
 PS1_DIR_CLR="1;33m"
 PS1_DIR_INACTIVE_CLR="2;93m"
 PS1_ALT_DIR_CLR="1;34m"

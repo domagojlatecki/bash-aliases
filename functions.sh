@@ -251,9 +251,9 @@ opt_newline_and_exit_code() {
     IFS=';' read -sdR -p $'\E[6n' row col
 
     if [ $col -ne 1 ]; then
-        echo -n "\[\033[0;31m\]⊖ ↵\[\033[0m\]\n\[\033[0m\]╭─[\u@\h][\[\033[$ecClr\]$ec\[\033[0m\]]"
+        echo -n "\[\033[0;31m\]⊖ ↵\[\033[0m\]\n\[\033[0m\]╭─[\u@\[\033[$HOST_CLR\h\[\033[0m\]][\[\033[$ecClr\]$ec\[\033[0m\]]"
     else
-        echo -n "\[\033[0m\]╭─[\u@\h][\[\033[$ecClr\]$ec\[\033[0m\]]"
+        echo -n "\[\033[0m\]╭─[\u@\[\033[$HOST_CLR\h\[\033[0m\]][\[\033[$ecClr\]$ec\[\033[0m\]]"
     fi
 }
 
